@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Admin from "./pages/Admin";
+import PrivateRoute from "./components/PrivateRoute";
+import Footer from "./components/Footer";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app" className="d-flex flex-column">
+      <Routes>
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route element={<PrivateRoute type={["ADMIN"]} />}>
+          <Route path="/admin" element={<Admin />}></Route>
+        </Route>
+
+        <Route path="*" element={() => <>404</>}></Route>
+      </Routes>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
