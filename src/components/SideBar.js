@@ -1,7 +1,7 @@
 import { Input, Modal } from "antd";
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { addPlayList } from "../src/features/playList";
 
 const SideBar = () => {
@@ -87,14 +87,6 @@ const SideBar = () => {
             Admin
           </Link>
         </li>
-        <li className="nav-item">
-          <a href="#/" className="nav-link">
-            <svg role="img" height="24" width="24" viewBox="0 0 24 24">
-              <path d="M14.5 2.134a1 1 0 011 0l6 3.464a1 1 0 01.5.866V21a1 1 0 01-1 1h-6a1 1 0 01-1-1V3a1 1 0 01.5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1zm6 0a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1z"></path>
-            </svg>{" "}
-            Your Library
-          </a>
-        </li>
       </ul>
 
       <div id="underList">
@@ -119,21 +111,6 @@ const SideBar = () => {
             </li>
           ))}
         </ul>
-
-        <button>
-          <div className="heart_bttn">
-            <svg
-              role="img"
-              height="12"
-              width="12"
-              aria-hidden="true"
-              viewBox="0 0 16 16"
-            >
-              <path d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"></path>
-            </svg>
-          </div>
-          Liked Songs
-        </button>
       </div>
 
       <hr className="mx-4 mb-0 mt-2" />

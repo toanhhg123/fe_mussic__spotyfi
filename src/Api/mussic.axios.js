@@ -1,10 +1,10 @@
 import axiosApi from "./axios";
 
-export const getAllMussic = async ({ pageIndex }) => {
+export const getAllMussic = async (params) => {
   try {
     const { data } = await axiosApi.get("/file/getAllFilePublicServer", {
       params: {
-        pageIndex,
+        ...params,
         type: "mp3",
       },
     });

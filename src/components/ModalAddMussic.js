@@ -39,7 +39,7 @@ const ModalAddMussic = ({ open, handleCancel, setData }) => {
       open={open}
       onCancel={handleCancel}
       onOk={handleOk}
-      title="Form Add New User"
+      title="Form Add New Music"
     >
       {success && <Alert message="Success add user" type="success" showIcon />}
       {error && <Alert message={error} type="error" showIcon />}

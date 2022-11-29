@@ -11,6 +11,7 @@ const initialState = {
     pageIndex: 0,
     pageSize: 0,
     pages: 0,
+    keyword: "",
   },
 };
 

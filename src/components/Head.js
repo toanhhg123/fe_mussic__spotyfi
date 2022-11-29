@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../src/features/auth";
 import ModalAuth from "./ModalAuth";
+import { getAllMussic } from "../Api/mussic.axios";
+import { getAllMussicReduce } from "../src/features/mussic";
 
 const Head = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const Head = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [typeAuth, setTypeAuth] = useState("login");
-
+  const [keyword, setKeyWord] = useState("");
   const {
     isLogin,
     data: { userInfo },
@@ -31,7 +33,13 @@ const Head = () => {
       />
       <div id="arrowMenu">
         <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">
+          <InputGroup.Text
+            id="basic-addon1"
+            role={"button"}
+            onClick={() => {
+              dispatch(getAllMussicReduce({ keyword }));
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -47,6 +55,7 @@ const Head = () => {
             placeholder="search"
             aria-label="search"
             aria-describedby="basic-addon1"
+            onChange={(e) => setKeyWord(e.target.value)}
           />
         </InputGroup>
       </div>
@@ -85,6 +94,7 @@ const Head = () => {
                 href="./login.html"
                 onClick={() => {
                   dispatch(logOut());
+                  setShowDropDownUser(false);
                   navigate("/home");
                 }}
               >
