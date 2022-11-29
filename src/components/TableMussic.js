@@ -54,13 +54,6 @@ const TableMusic = () => {
             className="flex-center"
             onClick={() => handleDeleteMussic(record._id)}
           />
-
-          <Button
-            type="primary"
-            shape="circle"
-            icon={<i className="bi bi-pen"></i>}
-            className="flex-center"
-          />
         </Space>
       ),
     },

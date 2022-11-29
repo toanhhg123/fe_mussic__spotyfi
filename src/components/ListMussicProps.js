@@ -1,18 +1,14 @@
-import { Modal, Pagination, Select } from "antd";
+import { message, Modal, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoMP3 } from "../assets/imgs";
 import { getAllMussicReduce } from "../src/features/mussic";
 import { choiceMusic } from "../src/features/mussicPlay";
 import { addMussicPlaylist } from "../src/features/playList";
-import { Button, message, Space } from "antd";
 
-const ListMussic = () => {
-  const { data } = useSelector((state) => state.mussic);
+const ListMussicProps = ({ mussics, title }) => {
   const { playLists } = useSelector((state) => state.playList);
   const [messageApi, contextHolder] = message.useMessage();
-
-  const { files, pageIndex, pageSize, totalItem } = data;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -70,30 +66,17 @@ const ListMussic = () => {
       </Modal>
       <h4 className="mb-3">
         <a href="#/">
-          <b>Your top mixes</b>
+          <b>{title}</b>
         </a>
       </h4>
       <a className="see-all" href="#/">
         SEE-ALL
       </a>
-      {totalItem && (
-        <Pagination
-          className="bg-white p-2 rounded"
-          simple
-          defaultCurrent={1}
-          total={totalItem}
-          style={{ width: "200px" }}
-          pageSize={pageSize}
-          onChange={(e) => {
-            dispatch(getAllMussicReduce({ pageIndex: e }));
-          }}
-        />
-      )}
 
       <br />
       <br />
       <ul className="playlists">
-        {[...files].map((x, i) => (
+        {[...mussics].map((x, i) => (
           <li key={x._id}>
             <img src={logoMP3} alt="" />
             <button
@@ -137,4 +120,4 @@ const ListMussic = () => {
   );
 };
 
-export default ListMussic;
+export default ListMussicProps;

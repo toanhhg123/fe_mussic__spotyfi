@@ -12,6 +12,7 @@ const Head = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [typeAuth, setTypeAuth] = useState("login");
 
   const {
     isLogin,
@@ -22,7 +23,12 @@ const Head = () => {
       id="topNav"
       className="d-flex justify-content-between align-items-center px-4 py-2"
     >
-      <ModalAuth show={show} handleClose={handleClose} type="login" />
+      <ModalAuth
+        show={show}
+        handleClose={handleClose}
+        type={typeAuth}
+        setType={setTypeAuth}
+      />
       <div id="arrowMenu">
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">

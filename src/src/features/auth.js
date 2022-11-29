@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginApi } from "../../Api/auth.axios";
+import { loginApi, register } from "../../Api/auth.axios";
 import { authStore } from "../../services/localStore";
 
 const auth = authStore.getStore();
@@ -63,6 +63,24 @@ export const loginReducer = createAsyncThunk(
       dispatch(resetState());
 
       return dispatch(requestSuccess(data));
+    } catch (error) {
+      dispatch(resetState());
+
+      dispatch(requestFail(error.message));
+    }
+  }
+);
+
+export const registerReducer = createAsyncThunk(
+  "loginThunk",
+  async (body, { dispatch }) => {
+    try {
+      dispatch(sendRequest());
+      const data = await register(body);
+      console.log(data);
+      dispatch(resetState());
+
+      return dispatch(loginReducer(body));
     } catch (error) {
       dispatch(resetState());
 

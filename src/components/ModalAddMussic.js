@@ -106,7 +106,7 @@ const ModalAddMussic = ({ open, handleCancel, setData }) => {
           />
         </Form.Item>
 
-        <Button hidden type="primary" htmlType="submit">
+        <Button hidden type="primary" htmltype="submit">
           Submit
         </Button>
       </Form>

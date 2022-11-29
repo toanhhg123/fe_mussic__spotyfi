@@ -1,9 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Input, Modal } from "antd";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addPlayList } from "../src/features/playList";
 
 const SideBar = () => {
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [name, setName] = useState("");
+  const { playLists } = useSelector((state) => state.playList);
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = () => {
+    setConfirmLoading(true);
+    if (name) {
+      dispatch(addPlayList(name));
+      setTimeout(() => {
+        setOpen(false);
+        setConfirmLoading(false);
+      }, 2000);
+    }
+  };
+  const handleCancel = () => {
+    console.log("Clicked cancel button");
+    setOpen(false);
+  };
   return (
     <nav id="latNav" className="w-100 pt-4 d-flex flex-column">
+      <Modal
+        title="Name PlayList"
+        open={open}
+        onOk={handleOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+      >
+        <Input
+          placeholder="Name"
+          required
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Modal>
       <a href="#/" className="d-flex px-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +98,7 @@ const SideBar = () => {
       </ul>
 
       <div id="underList">
-        <button>
+        <button onClick={showModal}>
           <div className="plus_bttn">
             <svg
               role="img"
@@ -74,6 +112,13 @@ const SideBar = () => {
           </div>
           Create Playlist
         </button>
+        <ul className="list-playList">
+          {playLists.map((x) => (
+            <li>
+              <Link to={"/playlist/" + x.name}>{x.name}</Link>
+            </li>
+          ))}
+        </ul>
 
         <button>
           <div className="heart_bttn">
@@ -92,69 +137,6 @@ const SideBar = () => {
       </div>
 
       <hr className="mx-4 mb-0 mt-2" />
-
-      <ul id="playlistSidebar" className="nav px-2">
-        <li className="nav-item">
-          <a
-            href="https://open.spotify.com/playlist/3DCIpP8UPdnLnUGsuEsr97"
-            className="nav-link"
-          >
-            <br />
-            sleep deprived
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            href="https://open.spotify.com/playlist/5lwd9A96hNLfiYCLKBQRN2"
-            className="nav-link"
-          >
-            adrenaline rush
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            href="https://open.spotify.com/playlist/0q0SddIoqUIMGm3Sgz3oMi"
-            className="nav-link"
-          >
-            impulse
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            href="https://open.spotify.com/playlist/5ZPjSoSwQs5QVlZDZjfiFI"
-            className="nav-link"
-          >
-            sixth gear
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            href="https://open.spotify.com/playlist/3zA5kLtGx3ghhhdoO7mdvF"
-            className="nav-link"
-          >
-            3:14 am
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            href="https://open.spotify.com/playlist/60HGr7YPE45JP6xaTWSbg4"
-            className="nav-link"
-          >
-            serenity
-          </a>
-        </li>
-      </ul>
-
-      <a href="login.html" id="installApp" className="d-block px-4 py-2">
-        Log Out
-      </a>
-      <a href="#/" id="installApp" className="d-block px-4 py-2">
-        <svg role="img" height="24" width="24" viewBox="0 0 24 24">
-          <path d="M12 3a9 9 0 100 18 9 9 0 000-18zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z"></path>
-          <path d="M12 6.05a1 1 0 011 1v7.486l1.793-1.793a1 1 0 111.414 1.414L12 18.364l-4.207-4.207a1 1 0 111.414-1.414L11 14.536V7.05a1 1 0 011-1z"></path>
-        </svg>{" "}
-        Install App
-      </a>
     </nav>
   );
 };

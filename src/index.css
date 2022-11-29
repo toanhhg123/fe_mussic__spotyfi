@@ -1,11 +1,27 @@
-#root{
-    width: 100% !important;
-    height: 100% !important;
-    overflow-y: hidden !important;
+#root {
+  width: 100% !important;
+  height: 100% !important;
+  overflow-y: hidden !important;
 }
 
-.flex-center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-add-list {
+  left: 8px;
+}
+
+.list-playList {
+  list-style: none;
+}
+
+.list-playList a {
+  display: block;
+  padding-left: 1rem;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
 }

@@ -6,7 +6,6 @@ import ListMussic from "../components/ListMussic";
 const Home = () => {
   return (
     <Layout>
-      <FeedHeader />
       <ListMussic />
     </Layout>
   );

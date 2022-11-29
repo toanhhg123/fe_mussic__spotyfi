@@ -18,6 +18,15 @@ export const createUser = async (body) => {
   }
 };
 
+export const updateUser = async (id, body) => {
+  try {
+    const { data } = await axiosApi.patch("/auth/update/" + id, body);
+    return data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || error.message);
+  }
+};
+
 export const deleteUser = async (id) => {
   try {
     const { data } = await axiosApi.delete("/auth/delete/" + id);

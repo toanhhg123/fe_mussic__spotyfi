@@ -314,7 +314,6 @@ body,
   flex-wrap: wrap;
   padding: 0;
   justify-content: space-between;
-  overflow-y: hidden;
   height: 380px;
 }
 

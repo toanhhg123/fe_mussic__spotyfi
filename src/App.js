@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer";
+import Layout from "./components/Layout";
+import PlayList from "./pages/PlayList";
 
 const App = () => {
   return (
@@ -14,8 +16,16 @@ const App = () => {
         <Route element={<PrivateRoute type={["ADMIN"]} />}>
           <Route path="/admin" element={<Admin />}></Route>
         </Route>
+        <Route path="/playlist/:name" element={<PlayList />}></Route>
 
-        <Route path="*" element={() => <>404</>}></Route>
+        <Route
+          path="*"
+          element={
+            <Layout>
+              <h1>Not Found</h1>
+            </Layout>
+          }
+        ></Route>
       </Routes>
       <Footer />
     </div>

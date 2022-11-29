@@ -2,10 +2,14 @@ import { Button, Space, Table, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import { deleteUser, getAllUser } from "../Api/admin.axios";
 import ModalAddUser from "./ModalAddUser";
+import ModalUpdateUser from "./ModalUpdateUser";
 
 const UserTable = () => {
   const [data, setData] = useState([]);
   const [modalAddUser, setModalAddUser] = useState(false);
+  const [modalUpdate, setModalUpdate] = useState(false);
+  const [userUpdate, setUserUpdate] = useState({});
+
   useEffect(() => {
     getAllUser()
       .then((res) => {
@@ -66,6 +70,7 @@ const UserTable = () => {
             shape="circle"
             icon={<i className="bi bi-pen"></i>}
             className="flex-center"
+            onClick={() => handleShowUpdate(record)}
           />
         </Space>
       ),
@@ -77,6 +82,11 @@ const UserTable = () => {
       setData((pre) => pre.filter((x) => x._id !== data._id));
     });
   };
+
+  const handleShowUpdate = (record) => {
+    setUserUpdate(record);
+    setModalUpdate(true);
+  };
   return (
     <>
       <ModalAddUser
@@ -84,6 +94,13 @@ const UserTable = () => {
         open={modalAddUser}
         handleCancel={() => setModalAddUser(false)}
       />
+      {modalUpdate && (
+        <ModalUpdateUser
+          data={userUpdate}
+          open={modalUpdate}
+          handleCancel={() => setModalUpdate(false)}
+        />
+      )}
       <Button
         className="mb-2"
         type="primary"
